@@ -1,0 +1,22 @@
+services:
+
+  postgres:
+    build:
+      context: ./postgres/
+      dockerfile: Dockerfile
+    container_name: postgres
+    profiles:
+      - backend
+    restart: always
+  
+  app:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    container_name: app
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+    profiles:
+      - backend
