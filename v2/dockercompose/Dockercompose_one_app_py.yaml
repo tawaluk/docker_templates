@@ -1,0 +1,28 @@
+services:
+
+  distributor:
+    container_name: distributor  # ЯлНя
+    #profiles:
+    #  - profileName
+    build:
+      context: . # если лежит рядом
+      dockerfile: Dockerfile # one_app_py.dockerfile
+    ports:
+    #  - "8081:8081"
+    #   - ${DOCKER_PORT_APP} # в дэфолте достанет из env
+    entrypoint: ["./venv/bin/python", "main.py"]
+    volumes:
+      - ./local_folder/local_file:/absolute_path_in_docker_folder/docker_file:rw  # file_to_file: контейнер может читать и писать в внешниие файлы
+      - ./local_folder/:/absolute_path_in_docker_folder/:ro  # folder_to_folder: контейнер может только только читать внешние файлы
+
+    restart: always
+
+networks:
+  modules_fo:
+
+#networks:
+#  name_net:
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: ${DOCKER_NET} Если нужно хардкодить сеть.
