@@ -1,0 +1,7 @@
+FROM postgres:16-debian
+
+RUN mkdir -p /var/lib/postgresql/data
+ENV POSTGRES_USER=${POSTGRES_USER}
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+ENV POSTGRES_DB=${POSTGRES_DB}
+CMD ["postgres"]
